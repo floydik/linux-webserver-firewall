@@ -17,7 +17,7 @@ class Firewall
 	    $ts = fgets($fh);
 	    fclose($fh);
 	} else {
-	    $ts=0;
+	    $ts = 0;
 	    $fh = fopen($tsfile,"w+");
 	    $cts = time().PHP_EOL;
 	    fwrite($fh, $cts);
@@ -29,6 +29,7 @@ class Firewall
     function settimestamp() 
     {
 	global $tsfile;
+	    $ts = 0;
 	    $fh = fopen($tsfile,"w+");
 	    $cts = time().PHP_EOL;
 	    fwrite($fh, $cts);
