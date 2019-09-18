@@ -26,6 +26,16 @@ class Firewall
 	return($ts);
     }
 
+    function settimestamp() 
+    {
+	global $tsfile;
+	    $fh = fopen($tsfile,"w+");
+	    $cts = time().PHP_EOL;
+	    fwrite($fh, $cts);
+	    fclose($fh);
+	return($ts);
+    }
+
 
 }
 
@@ -33,5 +43,6 @@ class Firewall
 $fw = new Firewall();
 $xts = $fw->gettimestamp();
 echo $xts.PHP_EOL;
-
+sleep(10);
+$xts = $fw->settimestamp();
 ?>
