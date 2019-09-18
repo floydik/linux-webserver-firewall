@@ -1,4 +1,9 @@
 <?php
+/* Description:
+   Firewall have file in /tmp/
+   After reboot file is missing and imported rules too
+*/
+
 // some settings
 $tsfile = "/tmp/firewall.sync";
 
