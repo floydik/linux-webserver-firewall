@@ -62,7 +62,7 @@ class Firewall
 			printf("ip route add blackhole %s/%s\n", $ip, $mask);
 		}
 		$stmt->close();
-		$ex = 0
+		$ex = 0;
 	}
 		    
 	$mysqli->close();
