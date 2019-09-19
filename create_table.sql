@@ -46,3 +46,15 @@ CREATE TABLE IF NOT EXISTS `ipv6` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `semaphore` (
+`id` ,
+`color` ,
+`description`
+)
+VALUES ('0', 'white', 'whitelisted IP'), 
+('1', 'green', 'known IP, now OK'),
+('2', 'yellow', 'temporary blacklisted'),
+('3', 'red', 'temporary blacklisted'),
+('4', 'black', 'permanently blacklisted'),
+('5', 'gray', 'for tests some future functionality');
