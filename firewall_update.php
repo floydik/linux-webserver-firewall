@@ -38,7 +38,7 @@ class Firewall
 	return($ts);
     }
     
-    function getrules($type,$timestamp,$iptype) 
+    function getrules($timestamp) 
     {
 	// $type whitelist/blacklist
 	// $timestamp 
@@ -65,6 +65,7 @@ class Firewall
 $fw = new Firewall();
 $xts = $fw->gettimestamp();
 echo $xts.PHP_EOL;
-sleep(10);
+$fw->getrules($xts);
+sleep(2);
 $xts = $fw->settimestamp();
 ?>
