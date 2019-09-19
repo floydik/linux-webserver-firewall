@@ -55,7 +55,7 @@ class Firewall
 	
 	// get data 
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 4;")) {
-		$stmt->bind_param("s", $timestamp);
+		$stmt->bind_param("i", $timestamp);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
 		while ($stmt->fetch()) {
@@ -65,7 +65,7 @@ class Firewall
 		$ex++;
 	}
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv6` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 4;")) {
-		$stmt->bind_param("s", $timestamp);
+		$stmt->bind_param("i", $timestamp);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
 		while ($stmt->fetch()) {
