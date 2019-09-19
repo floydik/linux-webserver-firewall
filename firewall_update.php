@@ -6,6 +6,7 @@
 
 // some settings
 $tsfile = "/tmp/firewall.sync";
+require("settings.php");
 
 class Firewall
 {
@@ -36,7 +37,12 @@ class Firewall
 	    fclose($fh);
 	return($ts);
     }
-
+    
+    function getrules($type,$timestamp,$iptype) 
+    {
+	
+	return($dataset);
+    }
 
 }
 
