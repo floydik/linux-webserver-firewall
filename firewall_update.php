@@ -58,17 +58,15 @@ class Firewall
 		$stmt->bind_param("s", $timestamp);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
-		$stmt->fetch();
-		printf("ip route add blackhole %s/%s\n", $ip, $mask);
+		while ($row = $stmt->fetch_row()) {
+			printf("ip route add blackhole %s/%s\n", $ip, $mask);
+		}
 		$stmt->close();
-		$ex = "ip route add blackhole ".$ip."/".$mask.PHP_EOL;
-		return($ex);
-}
-	    
-	    
-	    
+		$ex = 0
+	}
+		    
 	$mysqli->close();
-	return($dataset);
+	return($ex);
     }
 
 }
