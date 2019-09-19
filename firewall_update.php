@@ -43,7 +43,7 @@ class Firewall
 	// $type whitelist/blacklist
 	// $timestamp 
 	// $iptype IPv4/IPv6
-	
+	$ex = -2;
 	// connect to DB
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if (mysqli_connect_error()) {
@@ -62,9 +62,18 @@ class Firewall
 			printf("ip route add blackhole %s/%s\n", $ip, $mask);
 		}
 		$stmt->close();
-		$ex = 0;
+		$ex++;
 	}
-		    
+	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv6` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 4;")) {
+		$stmt->bind_param("s", $timestamp);
+		$stmt->execute();
+		$stmt->bind_result($ip,$mask);
+		while ($stmt->fetch()) {
+			printf("ip route add blackhole %s/%s\n", $ip, $mask);
+		}
+		$stmt->close();
+		$ex++;
+	}		    
 	$mysqli->close();
 	return($ex);
     }
@@ -75,7 +84,8 @@ class Firewall
 $fw = new Firewall();
 $xts = $fw->gettimestamp();
 echo $xts.PHP_EOL;
-$fw->getrules($xts);
+$x = $fw->getrules($xts);
 sleep(2);
 $xts = $fw->settimestamp();
+echo "x: "$x.PHP_EOL
 ?>
