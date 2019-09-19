@@ -54,6 +54,18 @@ class Firewall
 
 	
 	// get data 
+	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 4;")) {
+		$stmt->bind_param("s", $timestamp);
+		$stmt->execute();
+		$stmt->bind_result($ip,$mask);
+		$stmt->fetch();
+		printf("ip route add blackhole %s/%s\n", $ip, $mask);
+		$stmt->close();
+		$ex = "ip route add blackhole ".$ip."/".$mask.PHP_EOL;
+		return($ex);
+}
+	    
+	    
 	    
 	$mysqli->close();
 	return($dataset);
