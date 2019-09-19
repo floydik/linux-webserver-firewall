@@ -40,7 +40,22 @@ class Firewall
     
     function getrules($type,$timestamp,$iptype) 
     {
+	// $type whitelist/blacklist
+	// $timestamp 
+	// $iptype IPv4/IPv6
 	
+	// connect to DB
+	$mysqli = new mysqli('DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME');
+	if (mysqli_connect_error()) {
+    	die('Connect Error (' . mysqli_connect_errno() . ') '
+           . mysqli_connect_error());
+	}
+	echo 'Success... ' . $mysqli->host_info . "\n";
+
+	
+	// get data 
+	    
+	$mysqli->close();
 	return($dataset);
     }
 
