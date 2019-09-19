@@ -58,7 +58,7 @@ class Firewall
 		$stmt->bind_param("s", $timestamp);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
-		while ($row = $stmt->fetch_row()) {
+		while ($stmt->fetch()) {
 			printf("ip route add blackhole %s/%s\n", $ip, $mask);
 		}
 		$stmt->close();
