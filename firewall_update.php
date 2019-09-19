@@ -87,5 +87,5 @@ echo $xts.PHP_EOL;
 $x = $fw->getrules($xts);
 sleep(2);
 $xts = $fw->settimestamp();
-echo "x: "$x.PHP_EOL;
+echo "x: ".$x.PHP_EOL;
 ?>
