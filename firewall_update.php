@@ -55,7 +55,8 @@ class Firewall
 
 	
 	// get data 
-	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 4;")) {
+	// update ALL rules 
+	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
 		$stmt->bind_param("s", $ts);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
@@ -65,7 +66,7 @@ class Firewall
 		$stmt->close();
 		$ex++;
 	}
-	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv6` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 4;")) {
+	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv6` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
 		$stmt->bind_param("s", $ts);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
