@@ -50,7 +50,7 @@ class Firewall
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
 		while ($stmt->fetch()) {
-			$execute = "ip -"$protocol" route ".$rule." blackhole ".$ip."/".$mask;
+			$execute = "ip -".$protocol." route ".$rule." blackhole ".$ip."/".$mask;
 			echo $execute.PHP_EOL;
 			$out =  shell_exec($execute);
 		}
