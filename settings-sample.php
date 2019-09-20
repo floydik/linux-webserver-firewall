@@ -1,6 +1,6 @@
 <?php
-/* Description:
-   Database settings 
+/* 
+    Database settings 
 */
 // The name of the database 
 define( 'DB_NAME', 'some_databases' );
@@ -14,4 +14,13 @@ define( 'DB_HOST', 'some_server.some_domain.tld' );
 define( 'DB_CHARSET', 'utf8' );
 // Database Collate type
 define( 'DB_COLLATE', '' );
+?>
+
+/* 
+    Rules settings 
+*/
+
+define( 'GREEN_TIME', 60 * 60 ); // one hour
+define( 'YELLOW_TIME', 7 * 24 * 60 * 60 ); // one week
+define( 'RED_TIME', 30 * 24 * 60 * 60 ); // 30 days
 ?>
