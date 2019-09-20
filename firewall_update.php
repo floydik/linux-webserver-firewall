@@ -62,7 +62,7 @@ class Firewall
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
 		while ($stmt->fetch()) {
-			$execute = "ip route add blackhole".$ip."/".$mask;
+			$execute = "ip route add blackhole ".$ip."/".$mask;
 			echo $execute.PHP_EOL;
 			$out =  shell_exec($execute);
 		}
