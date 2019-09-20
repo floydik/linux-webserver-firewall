@@ -80,16 +80,16 @@ class Firewall
 	$protocol = "4";
 	$rule = "add";
 	$ts = date('Y-m-d H:i:s',$timestamp);
-	executerules($protocol,$rule,$ts);    
+	$this->executerules($protocol,$rule,$ts);    
 	$protocol = "6";
-	executerules($protocol,$rule,$ts);
+	$this->executerules($protocol,$rule,$ts);
 	// remove GREEN
 	$ts = date('Y-m-d H:i:s',$timestamp - GREEN_TIME);
 	$protocol = "4";
 	$rule = "del";
-	executerules($protocol,$rule,$ts);
+	$this->executerules($protocol,$rule,$ts);
 	$protocol = "6";
-	executerules($protocol,$rule,$ts);
+	$this->executerules($protocol,$rule,$ts);
 	// REMOVE YELLOW
 
 	// REMOVE RED
