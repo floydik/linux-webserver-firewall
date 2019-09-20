@@ -41,10 +41,11 @@ class Firewall
 	
     function executerules($protocol,$rule,$ts) 
     {
-	// $table: 4 or 6
+	// $protocol: 4 or 6
 	// $rule: add or del
 	// $ts: date('Y-m-d H:i:s')
-	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv."$protocol".` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
+	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv?` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
+		$stmt->bind_param("s", $protocol);
 		$stmt->bind_param("s", $ts);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
