@@ -86,7 +86,6 @@ $fw = new Firewall();
 $xts = $fw->gettimestamp();
 echo $xts.PHP_EOL;
 $x = $fw->getrules($xts);
-sleep(2);
 $xts = $fw->settimestamp();
-echo "x: ".$x.PHP_EOL;
+echo "... and it is done!".PHP_EOL;
 ?>
