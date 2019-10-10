@@ -52,6 +52,9 @@ class Firewall
 	echo 'Success... ' . $mysqli->host_info . "\n";
 	
 	// get data 
+	    $ts_green = date('Y-m-d H:i:s',$timestamp-GREEN_TIME);
+	    $ts_yellow = date('Y-m-d H:i:s',$timestamp-YELLOW_TIME);
+	    $ts_red = date('Y-m-d H:i:s',$timestamp-RED_TIME);
 	// update ALL rules 
 	// first update IPv4 rules    
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
@@ -80,24 +83,33 @@ class Firewall
 		$ex++;
 	}
 	// remove IPv4 expired rules and "violet" rules
-	    $ts_green = date('Y-m-d H:i:s',$timestamp-GREEN_TIME);
-	    $ts_yellow = date('Y-m-d H:i:s',$timestamp-YELLOW_TIME);
-	    $ts_red = date('Y-m-d H:i:s',$timestamp-RED_TIME);
-	    
-	    $query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` > '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` > '$ts_red' AND `semaphore_id` = 4);";
-	    if ($stmt = $mysqli->prepare($query)) {
+	$query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` > '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` > '$ts_red' AND `semaphore_id` = 4);";
+	if ($stmt = $mysqli->prepare($query)) {
 		//$stmt->bind_param("s", $ts_date);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
 		while ($stmt->fetch()) {
 			$execute = "ip route del blackhole ".$ip."/".$mask;
 			echo $execute.PHP_EOL;
-			//$out =  shell_exec($execute);
+			$out =  shell_exec($execute);
 		}
 		$stmt->close();
 		$ex++;
 	}    
 	// and finaly remove IPv6 expired and "violet" rules
+	$query = "SELECT `ip`,`mask` FROM `ipv6` WHERE (`updatetime` > '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` > '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` > '$ts_red' AND `semaphore_id` = 4);";
+	if ($stmt = $mysqli->prepare($query)) {
+		//$stmt->bind_param("s", $ts_date);
+		$stmt->execute();
+		$stmt->bind_result($ip,$mask);
+		while ($stmt->fetch()) {
+			$execute = "ip route del blackhole ".$ip."/".$mask;
+			echo $execute.PHP_EOL;
+			$out =  shell_exec($execute);
+		}
+		$stmt->close();
+		$ex++;
+	}    
 	    
 	$mysqli->close(); //close connection to MySQL 
 	return($ex);
