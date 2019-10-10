@@ -53,8 +53,8 @@ INSERT INTO `semaphore` (
 `description`
 )
 VALUES ('0', 'white', 'whitelisted IP'), 
-('1', 'green', 'known IP, now OK'),
-('2', 'violet', 'manually delisted'),
+('1', 'violet', 'manually delisted'),
+('2', 'green', 'known IP, now OK'),
 ('3', 'yellow', 'temporary blacklisted'),
 ('4', 'red', 'temporary blacklisted'),
 ('5', 'black', 'permanently blacklisted'),
