@@ -40,7 +40,8 @@ class Firewall
 	// $type whitelist/blacklist
 	// $timestamp 
 	// $iptype IPv4/IPv6
-	$ex = -2;
+	$ex = -2; //exit value
+	$timestamp = intval($timestamp); // string -> integer
 	$ts_date = date('Y-m-d H:i:s',$timestamp);
 	// connect to DB
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
