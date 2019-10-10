@@ -81,8 +81,11 @@ class Firewall
 	}
 	// remove IPv4 expired rules and "violet" rules
 	    $h = "P".GREEN_TIME."S";
-	    $hg = date_sub($ts_date, $h);
-	    $query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$helpGreen' AND `semaphore_id` = 2);";
+	    $date = new DateTime($ts_date);
+     	    $date->sub(new DateInterval($h);
+	    $hg = $date->format('Y-m-d H:i:s');
+	    
+	    $query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$hg' AND `semaphore_id` = 2);";
 	    echo $query.PHP_EOL;
 	    die();
 	if ($stmt = $mysqli->prepare($query)) {
