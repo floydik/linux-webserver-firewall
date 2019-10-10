@@ -80,7 +80,9 @@ class Firewall
 		$ex++;
 	}
 	// remove IPv4 expired rules and "violet" rules
-	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > '$ts_date'-'GREENTIME' AND `semaphore_id` BETWEEN 2 AND 5;")) {
+	    $query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$ts_date'-'GREENTIME' AND `semaphore_id` = 2);";
+	    echo $query.PHP_EOL;
+	if ($stmt = $mysqli->prepare($query)) {
 		//$stmt->bind_param("s", $ts_date);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
