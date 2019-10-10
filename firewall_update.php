@@ -41,7 +41,7 @@ class Firewall
 	// $timestamp 
 	// $iptype IPv4/IPv6
 	$ex = -2;
-	$ts = date('Y-m-d H:i:s',$timestamp);
+	$ts_date = date('Y-m-d H:i:s',$timestamp);
 	// connect to DB
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if (mysqli_connect_error()) {
@@ -54,7 +54,7 @@ class Firewall
 	// update ALL rules 
 	    
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
-		$stmt->bind_param("s", $ts);
+		$stmt->bind_param("s", $ts_date);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
 		while ($stmt->fetch()) {
@@ -66,7 +66,7 @@ class Firewall
 		$ex++;
 	}
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv6` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
-		$stmt->bind_param("s", $ts);
+		$stmt->bind_param("s", $ts_date);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
 		while ($stmt->fetch()) {
