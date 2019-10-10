@@ -88,4 +88,5 @@ echo $xts.PHP_EOL;
 $x = $fw->getrules($xts);
 $xts = $fw->settimestamp();
 echo "... and it is done!".PHP_EOL;
+echo $x.PHP_EOL;
 ?>
