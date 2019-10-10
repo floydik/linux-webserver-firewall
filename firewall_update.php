@@ -53,7 +53,7 @@ class Firewall
 	
 	// get data 
 	// update ALL rules 
-	    
+	// first update IPv4 rules    
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
 		$stmt->bind_param("s", $ts_date);
 		$stmt->execute();
@@ -66,6 +66,7 @@ class Firewall
 		$stmt->close();
 		$ex++;
 	}
+	// then update IPv6 rules
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv6` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
 		$stmt->bind_param("s", $ts_date);
 		$stmt->execute();
@@ -77,8 +78,23 @@ class Firewall
 		}
 		$stmt->close();
 		$ex++;
-	}		    
-	$mysqli->close();
+	}
+	// remove IPv4 expired rules and "violet" rules
+	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > '$ts_date'-'GREENTIME' AND `semaphore_id` BETWEEN 2 AND 5;")) {
+		//$stmt->bind_param("s", $ts_date);
+		$stmt->execute();
+		$stmt->bind_result($ip,$mask);
+		while ($stmt->fetch()) {
+			$execute = "ip route del blackhole ".$ip."/".$mask;
+			echo $execute.PHP_EOL;
+			//$out =  shell_exec($execute);
+		}
+		$stmt->close();
+		$ex++;
+	}    
+	// and finaly remove IPv6 expired and "violet" rules
+	    
+	$mysqli->close(); //close connection to MySQL 
 	return($ex);
     }
 }
