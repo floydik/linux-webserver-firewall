@@ -84,10 +84,8 @@ class Firewall
 	    $ts_yellow = date('Y-m-d H:i:s',$timestamp-YELLOW_TIME);
 	    $ts_red = date('Y-m-d H:i:s',$timestamp-RED_TIME);
 	    
-	    $query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$ts_green' AND `semaphore_id` = 2);";
-	    echo $query.PHP_EOL;
-	    die();
-	if ($stmt = $mysqli->prepare($query)) {
+	    $query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` > '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` > '$ts_red' AND `semaphore_id` = 4);";
+	    if ($stmt = $mysqli->prepare($query)) {
 		//$stmt->bind_param("s", $ts_date);
 		$stmt->execute();
 		$stmt->bind_result($ip,$mask);
