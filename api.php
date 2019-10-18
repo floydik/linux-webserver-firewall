@@ -26,10 +26,13 @@ function filterinputip($ip) {
 
 
 // IPv4 
+function insertipv4($ip) {
 // Look up for IP. Is whitelisted? If yes exit
+    $q = "SELECT * FROM `ipv4` WHERE `ip` LIKE $ip;";
 // Look up for IP range. Is whitelisted? If yes exit
 // If is new then set semaphore = 2 and insert IP
 // if is exists then semaphore++ and update tables
+}
 
 // IPv6
 // Look up for IP. Is whitelisted? If yes exit
