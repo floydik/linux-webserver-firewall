@@ -29,6 +29,7 @@ function filterinputip($ip) {
 
 // IPv4 
 function insertipv4($ip) {
+    echo "fce insertipv4".PHP_EOL;
 // Look up for IP. Is whitelisted? If yes exit
     $q = "SELECT * FROM `ipv4` WHERE `ip` LIKE $ip AND `semaphore_id` = 0;";
 // Look up for IP range. Is whitelisted? If yes exit
