@@ -32,7 +32,6 @@ function insertipv4($ip) {
     echo "fce insertipv4".PHP_EOL;
 // Look up for IP. Is whitelisted? If yes exit
     $q = "SELECT * FROM `ipv4` WHERE `ip` LIKE '$ip';";
-// Look up for IP range. Is whitelisted? If yes exit
 // If is new then set semaphore = 3 and insert IP
 // if is exists then semaphore++ and update tables
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -42,24 +41,25 @@ function insertipv4($ip) {
         }
     //
     if ($result = $mysqli->query($q)) {
-        echo "IP se našla ;-)".PHP_EOL;
-        $fields = $result->fetch_assoc();
-        echo "semafor: ".$fields['semaphore_id'].PHP_EOL;
-        if ($fields['semaphore_id'] > 0) {
-            $id = $fields['id'];
-            $q2 = "UPDATE `ipv4` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
-            $result->close();
-            echo $q2.PHP_EOL;
-            if ($mysqli->query($q2) === TRUE) {
-                printf("UPDATE OK\n");
+        if (($result->num_rows) > 0) {
+            echo "IP se našla ;-)".PHP_EOL;
+            $fields = $result->fetch_assoc();
+            echo "semafor: ".$fields['semaphore_id'].PHP_EOL;
+            if ($fields['semaphore_id'] > 0) {
+                $id = $fields['id'];
+                $q2 = "UPDATE `ipv4` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
+                $result->close();
+                echo $q2.PHP_EOL;
+                if ($mysqli->query($q2) === TRUE) {
+                    printf("UPDATE OK\n");
+                }
             }
-        }
-        
-    } else {
-        $q = "INSERT into `ipv4` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '3');";
-        echo $q.PHP_EOL;
-        if ($mysqli->query($q) === TRUE) {
-            printf("INSERT OK\n");
+        } else {
+            $q = "INSERT into `ipv4` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '3');";
+            echo $q.PHP_EOL;
+            if ($mysqli->query($q) === TRUE) {
+                printf("INSERT OK\n");
+            }
         }
     }
     $mysqli->close();
