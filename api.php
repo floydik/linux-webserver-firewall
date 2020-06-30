@@ -31,7 +31,7 @@ function filterinputip($ip) {
 function insertipv4($ip) {
     echo "fce insertipv4".PHP_EOL;
 // Look up for IP. Is whitelisted? If yes exit
-    $q = "SELECT * FROM `ipv4` WHERE `ip` LIKE $ip AND `semaphore_id` = 0;";
+    $q = "SELECT * FROM `ipv4` WHERE `ip` LIKE $ip;";
 // Look up for IP range. Is whitelisted? If yes exit
 // If is new then set semaphore = 3 and insert IP
 // if is exists then semaphore++ and update tables
@@ -43,11 +43,21 @@ function insertipv4($ip) {
     //
     if ($result = $mysqli->query($q)) {
         echo "IP se našla ;-)".PHP_EOL;
+        $fields = $result->fetch_assoc();
+        if ($fields['semaphore_id'] == 0) return (0);
+        if ($fields['semaphore_id'] > 0) {
+            $q2 = "UPDATE `ipv4` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $fields['id'];";
+            return (1);    
+        }
+        $result->close();
+        if ($mysqli->query($q2) === TRUE) {
+            printf("UPDATE OK\n");
+        }
     } else {
         $q = "INSERT into `ipv4` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '3');";
         echo $q.PHP_EOL;
         if ($mysqli->query($q) === TRUE) {
-            printf("OK\n");
+            printf("INSERT OK\n");
         }
     }
     $mysqli->close();
