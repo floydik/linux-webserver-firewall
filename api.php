@@ -51,6 +51,7 @@ function insertipv4($ip) {
             return (1);    
         }
         $result->close();
+        echo $q2.PHP_EOL;
         if ($mysqli->query($q2) === TRUE) {
             printf("UPDATE OK\n");
         }
