@@ -45,11 +45,9 @@ function insertipv4($ip) {
         echo "IP se našla ;-)".PHP_EOL;
         $fields = $result->fetch_assoc();
         echo "semafor: ".$fields['semaphore_id'].PHP_EOL;
-        if ($fields['semaphore_id'] == 0) return (0);
         if ($fields['semaphore_id'] > 0) {
             $id = $fields['id'];
             $q2 = "UPDATE `ipv4` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
-            return (1);    
         }
         $result->close();
         echo $q2.PHP_EOL;
