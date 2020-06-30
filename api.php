@@ -39,7 +39,7 @@ function insertipv4($ip) {
         }
     //
     if ($result = $mysqli->query($q)) {
-            if ($result->num_rows) == 0 {
+            if (($result->num_rows) == 0) {
                 $q = "INSERT into `ipv4` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', CURRENT_TIME(), '3');";
                 echo $q;
                 if ($mysqli->query($q) === TRUE) {
