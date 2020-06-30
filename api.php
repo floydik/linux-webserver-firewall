@@ -31,7 +31,7 @@ function filterinputip($ip) {
 function insertipv4($ip) {
     echo "fce insertipv4".PHP_EOL;
 // Look up for IP. Is whitelisted? If yes exit
-    $q = "SELECT * FROM `ipv4` WHERE `ip` LIKE $ip;";
+    $q = "SELECT * FROM `ipv4` WHERE `ip` LIKE '$ip';";
 // Look up for IP range. Is whitelisted? If yes exit
 // If is new then set semaphore = 3 and insert IP
 // if is exists then semaphore++ and update tables
