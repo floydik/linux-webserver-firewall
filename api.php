@@ -70,6 +70,44 @@ function insertipv4($ip) {
 // Look up for IP range. Is whitelisted? If yes exit
 // If is new then set semaphore = 3 and insert IP
 // if is exists then semaphore++ and update tables
+function insertipv6($ip) {
+    echo "fce insertipv6".PHP_EOL;
+// Look up for IP. Is whitelisted? If yes exit
+    $q = "SELECT * FROM `ipv6` WHERE `ip` LIKE '$ip';";
+// Look up for IP range. Is whitelisted? If yes exit
+// If is new then set semaphore = 3 and insert IP
+// if is exists then semaphore++ and update tables
+    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        if (mysqli_connect_error()) {
+        die('Connect Error (' . mysqli_connect_errno() . ') '
+           . mysqli_connect_error());
+        }
+    //
+    if ($result = $mysqli->query($q)) {
+        echo "IP se našla ;-)".PHP_EOL;
+        $fields = $result->fetch_assoc();
+        echo "semafor: ".$fields['semaphore_id'].PHP_EOL;
+        if ($fields['semaphore_id'] > 0) {
+            $id = $fields['id'];
+            $q2 = "UPDATE `ipv6` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
+            $result->close();
+            echo $q2.PHP_EOL;
+            if ($mysqli->query($q2) === TRUE) {
+                printf("UPDATE OK\n");
+            }
+        }
+        
+    } else {
+        $q = "INSERT into `ipv6` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '128', NULL, '3');";
+        echo $q.PHP_EOL;
+        if ($mysqli->query($q) === TRUE) {
+            printf("INSERT OK\n");
+        }
+    }
+    $mysqli->close();
+} // end of insertipv6
+
+
 
 $x = "217.198.116.129";
 $i = filterinputip($x);
@@ -79,6 +117,8 @@ if ($i==4) insertipv4($x);
 $x = "2a00:19a0:3:74:0:d9c6:7481:1";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
+if ($i==6) insertipv6($x);
+
 $x = "test.rest.cz";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
