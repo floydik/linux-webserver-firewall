@@ -78,7 +78,7 @@ insertipvC($x,$i);
 $x = "2a00:19a0:3:74:0:d9c6:7481:1";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
-insertipvC($x);
+insertipvC($x,$i);
 
 $x = "test.rest.cz";
 $i = filterinputip($x);
