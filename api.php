@@ -2,6 +2,8 @@
 /*
 Main script for insert rules
 */
+// import settings
+require ("./settings.php");
 
 // autentization
 // IP or range of IPs
