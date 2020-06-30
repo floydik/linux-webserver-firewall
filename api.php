@@ -46,7 +46,8 @@ function insertipv4($ip) {
         $fields = $result->fetch_assoc();
         if ($fields['semaphore_id'] == 0) return (0);
         if ($fields['semaphore_id'] > 0) {
-            $q2 = "UPDATE `ipv4` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $fields['id'];";
+            $id = $fields['id'];
+            $q2 = "UPDATE `ipv4` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
             return (1);    
         }
         $result->close();
