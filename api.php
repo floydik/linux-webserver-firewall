@@ -27,7 +27,7 @@ function filterinputip($ip) {
 
 
 
-// IPv4 
+// Insert IP or update semaphore_id in ipv4 or ipv6 tables
 function insertipvC($ip,$c) {
     echo "fce insertipv$c".PHP_EOL;
 // Look up for IP. Is whitelisted? If yes exit
@@ -64,9 +64,6 @@ function insertipvC($ip,$c) {
     }
     $mysqli->close();
 } // end of insertipvX
-
-// IPv6
-
 
 
 
