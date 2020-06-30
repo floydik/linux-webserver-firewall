@@ -48,12 +48,13 @@ function insertipv4($ip) {
         if ($fields['semaphore_id'] > 0) {
             $id = $fields['id'];
             $q2 = "UPDATE `ipv4` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
+            $result->close();
+            echo $q2.PHP_EOL;
+            if ($mysqli->query($q2) === TRUE) {
+                printf("UPDATE OK\n");
+            }
         }
-        $result->close();
-        echo $q2.PHP_EOL;
-        if ($mysqli->query($q2) === TRUE) {
-            printf("UPDATE OK\n");
-        }
+        
     } else {
         $q = "INSERT into `ipv4` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '3');";
         echo $q.PHP_EOL;
