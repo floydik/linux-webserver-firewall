@@ -12,7 +12,18 @@ require ("./settings.php");
 // client certificate
 
 // log request
-
+function logrequest() {
+    if (isset($_GET['ip'])) $ip = $_GET['ip'];
+    if (isset($_GET['source'])) $source = $_GET['source'];
+    if (isset($_GET['reason'])) $reason = $_GET['reason'];
+    if (isset($_GET['action'])) $action = $_GET['action'];
+    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'] else $clientip = $_SERVER['REMOTE_ADDR'];
+    $str = $ip." ".$source." ".$reason." ".$action." ".$clientip."\n";
+    $handle = fopen(LOGFIE, "a+");
+    fwrite($handle, $str);
+    fclose($handle);
+    return array ($ip, $action);
+}
 
 
 // verify IP (IPv4 or IPv6 or sth else)
@@ -85,5 +96,5 @@ $x = "test.rest.cz";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
 
-
+print_r (logrequest());
 ?>
