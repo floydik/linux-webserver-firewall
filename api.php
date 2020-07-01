@@ -17,7 +17,11 @@ function logrequest() {
     if (isset($_GET['source'])) $source = $_GET['source'];
     if (isset($_GET['reason'])) $reason = $_GET['reason'];
     if (isset($_GET['action'])) $action = $_GET['action'];
-    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'] else $clientip = $_SERVER['REMOTE_ADDR'];
+    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'] 
+    } else {
+        $clientip = $_SERVER['REMOTE_ADDR'];
+    }
     $str = $ip." ".$source." ".$reason." ".$action." ".$clientip."\n";
     $handle = fopen(LOGFIE, "a+");
     fwrite($handle, $str);
