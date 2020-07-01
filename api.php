@@ -81,7 +81,7 @@ function insertipvC($ip,$c) {
 } // end of insertipvX
 
 
-
+/*
 $x = "217.198.116.129";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
@@ -95,6 +95,15 @@ insertipvC($x,$i);
 $x = "test.rest.cz";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
+*/
+if (logrequest([0]) == 0) {
+    $x = logrequest([1]);
+    $i = filterinputip($x);
+    insertipvC($x,$i);
+} else {
+    echo "Ne a ne a ne!";
+}
 
-print_r (logrequest());
+        
+
 ?>
