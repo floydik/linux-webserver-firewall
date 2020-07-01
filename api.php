@@ -96,8 +96,8 @@ $x = "test.rest.cz";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
 */
-if (logrequest([0]) == 0) {
-    $x = logrequest([1]);
+if (logrequest([1]) == 0) {
+    $x = logrequest([0]);
     $i = filterinputip($x);
     insertipvC($x,$i);
 } else {
