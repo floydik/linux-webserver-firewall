@@ -11,6 +11,10 @@ require ("./settings.php");
 // api key
 // client certificate
 
+// log request
+
+
+
 // verify IP (IPv4 or IPv6 or sth else)
 function filterinputip($ip) {
     if (filter_var($ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4)) {
