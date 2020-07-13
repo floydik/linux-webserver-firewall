@@ -23,4 +23,8 @@ define( 'DB_COLLATE', '' );
 define( 'GREEN_TIME', 60 * 60 ); // one hour
 define( 'YELLOW_TIME', 7 * 24 * 60 * 60 ); // one week
 define( 'RED_TIME', 30 * 24 * 60 * 60 ); // 30 days
+
+/* log file settings */
+define ( 'LOGFIE', 'requests.log' );
+
 ?>
