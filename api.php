@@ -13,10 +13,10 @@ require ("./settings.php");
 
 // log request
 function logrequest() {
-    (isset($_GET['ip'])) ? $ip = $_GET['ip'] : $ip=0;
-    (isset($_GET['source'])) ? $source = $_GET['source'] : $source = 0;
-    (isset($_GET['reason'])) ? $reason = $_GET['reason'] : $reason = "";
-    (isset($_GET['action'])) ? $action = $_GET['action'] : $action = 0;
+    (isset($_POST['ip'])) ? $ip = $_POST['ip'] : $ip=0;
+    (isset($_POST['source'])) ? $source = $_POST['source'] : $source = 0;
+    (isset($_POST['reason'])) ? $reason = $_POST['reason'] : $reason = "";
+    (isset($_POST['action'])) ? $action = $_POST['action'] : $action = 0;
     (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) ? $clientip = $_SERVER['HTTP_X_FORWARDED_FOR'] : $clientip = $_SERVER['REMOTE_ADDR'];
     $str = $ip." ".$source." ".$reason." ".$action." ".$clientip."\n";
     $handle = fopen(LOGFIE, "a+");
