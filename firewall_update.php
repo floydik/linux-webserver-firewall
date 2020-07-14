@@ -83,7 +83,7 @@ class Firewall
 		$ex++;
 	}
 	// remove IPv4 expired rules and "violet" rules
-	$query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` > '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` > '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` > '$ts_red' AND `semaphore_id` = 4) OR (`semaphore_id` = 1);";
+	$query = "SELECT `ip`,`mask` FROM `ipv4` WHERE (`updatetime` < '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` < '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` < '$ts_red' AND `semaphore_id` = 4) OR (`semaphore_id` = 1);";
 	echo $query.PHP_EOL;
 	if ($stmt = $mysqli->prepare($query)) {
 		//$stmt->bind_param("s", $ts_date);
@@ -98,7 +98,7 @@ class Firewall
 		$ex++;
 	}    
 	// and finaly remove IPv6 expired and "violet" rules
-	$query = "SELECT `ip`,`mask` FROM `ipv6` WHERE (`updatetime` > '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` > '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` > '$ts_red' AND `semaphore_id` = 4) OR (`semaphore_id` = 1);";
+	$query = "SELECT `ip`,`mask` FROM `ipv6` WHERE (`updatetime` < '$ts_green' AND `semaphore_id` = 2) OR (`updatetime` < '$ts_yellow' AND `semaphore_id` = 3) OR (`updatetime` < '$ts_red' AND `semaphore_id` = 4) OR (`semaphore_id` = 1);";
 	echo $query.PHP_EOL;
 	if ($stmt = $mysqli->prepare($query)) {
 		//$stmt->bind_param("s", $ts_date);
