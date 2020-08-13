@@ -7,7 +7,7 @@
     </head>
 
     <body>
-     <form action="/api.php" method="post">
+     <form action="api.php" method="post">
         <label for="ip">IP:</label><br>
         <input type="text" id="ip" name="ip" value="255.255.255.255"><br>
         <label for="source">source:</label><br>
