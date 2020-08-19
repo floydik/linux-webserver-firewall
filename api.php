@@ -96,7 +96,7 @@ $x = "test.rest.cz";
 $i = filterinputip($x);
 echo $i.PHP_EOL;
 */
-
+/*
 if (logrequest()[1] == 0) {
     $x = logrequest()[0];
     $i = filterinputip($x);
@@ -104,7 +104,27 @@ if (logrequest()[1] == 0) {
 } else {
     echo "Ne a ne a ne!";
 }
+*/
+// dig off input parameters
+$l[] = logrequest()[];
+$i = filterinputip($l[0]);
+$action = $l[1];
 
+switch ($action) {
+    case 0:
+        insertipvC($x,$i);
+    break;
         
+    case 1:
+    break;
+    
+    case 2:
+    break;
+    
+    case 3:
+    break
+}
+
+
 
 ?>
