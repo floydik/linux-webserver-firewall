@@ -43,7 +43,7 @@ function filterinputip($ip) {
 
 
 // Insert IP or update semaphore_id in ipv4 or ipv6 tables
-function insertipvC($ip,$c) {
+function insertipvC($ip,$c,$a) {
     echo "fce insertipv$c".PHP_EOL;
 // Look up for IP. Is whitelisted? If yes exit
     $q = "SELECT * FROM `ipv$c` WHERE `ip` LIKE '$ip';";
@@ -62,7 +62,20 @@ function insertipvC($ip,$c) {
             echo "semafor: ".$fields['semaphore_id'].PHP_EOL;
             if ($fields['semaphore_id'] > 0) {
                 $id = $fields['id'];
-                $q2 = "UPDATE `ipv$c` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
+                switch ($a) {
+                    case 0:
+                        $q2 = "UPDATE `ipv$c` SET `semaphore_id` = `semaphore_id` + 1 WHERE `id` = $id;";
+                        break;
+                    case 1:
+                        $q2 = "UPDATE `ipv$c` SET `semaphore_id` = 5 WHERE `id` = $id;";
+                        break;
+                    case 2:
+                        $q2 = "UPDATE `ipv$c` SET `semaphore_id` = 0 WHERE `id` = $id;";
+                        break;
+                    case 3:
+                        $q2 = "UPDATE `ipv$c` SET `semaphore_id` = 1 WHERE `id` = $id;";
+                        break;
+                }
                 $result->close();
                 echo $q2.PHP_EOL;
                 if ($mysqli->query($q2) === TRUE) {
@@ -70,7 +83,20 @@ function insertipvC($ip,$c) {
                 }
             }
         } else {
-            $q = "INSERT into `ipv$c` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '3');";
+            switch ($a) {
+                case 0:
+                    $q = "INSERT into `ipv$c` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '3');";
+                    break;
+                case 1:
+                    $q = "INSERT into `ipv$c` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '5');";
+                    break;
+                case 2:
+                    $q = "INSERT into `ipv$c` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '0');";
+                    break;
+                case 3:
+                    $q = "INSERT into `ipv$c` (`id`, `ip`, `mask`, `updatetime`, `semaphore_id`) VALUES (NULL, '$ip', '32', NULL, '0');";
+                    break;
+            }
             echo $q.PHP_EOL;
             if ($mysqli->query($q) === TRUE) {
                 printf("INSERT OK\n");
@@ -105,27 +131,17 @@ if (logrequest()[1] == 0) {
     echo "Ne a ne a ne!";
 }
 */
+
+
 // dig off input parameters
 $l = logrequest();
 $ip = $l[0];
 $x = filterinputip($ip);
 $action = $l[1];
 
-switch ($action) {
-    case 0:
-        insertipvC($ip,$x);
-    break;
-        
-    case 1:
-    break;
-    
-    case 2:
-    break;
-    
-    case 3:
-    break;
+if ($x>0) { 
+    insertipvC($ip,$x,$action);
 }
-
 
 
 ?>
