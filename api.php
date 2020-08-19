@@ -122,7 +122,7 @@ switch ($action) {
     break;
     
     case 3:
-    break
+    break;
 }
 
 
