@@ -113,7 +113,7 @@ $action = $l[1];
 
 switch ($action) {
     case 0:
-        insertipvC($x,$ip);
+        insertipvC($ip,$x);
     break;
         
     case 1:
