@@ -16,8 +16,8 @@
         <input type="text" id="reason" name="reason" value="ftp attack"><br><br>
         <label for="action">action: </label>
         <select id="action" name="action">
-          <option value="0" selected>add to blacklist temporarily</option>
-          <option value="1">add to blacklist</option>
+          <option value="0">add to blacklist temporarily</option>
+          <option value="1" selected>add to blacklist</option>
           <option value="2">add to whitelist</option>
           <option value="3">temporary remove</option>
           <option value="4">just in case</option>
