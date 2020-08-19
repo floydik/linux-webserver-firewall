@@ -106,7 +106,7 @@ if (logrequest()[1] == 0) {
 }
 */
 // dig off input parameters
-$l[] = logrequest()[];
+$l[] = logrequest();
 $i = filterinputip($l[0]);
 $action = $l[1];
 
