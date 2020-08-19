@@ -107,13 +107,13 @@ if (logrequest()[1] == 0) {
 */
 // dig off input parameters
 $l = logrequest();
-print_r($l);
-$i = filterinputip($l[0]);
+$ip = $l[0];
+$x = filterinputip($ip);
 $action = $l[1];
 
 switch ($action) {
     case 0:
-        insertipvC($x,$i);
+        insertipvC($x,$ip);
     break;
         
     case 1:
