@@ -5,6 +5,7 @@ Main script for insert rules
 // import settings
 require ("./settings.php");
 
+// todo:
 // autentization
 // IP or range of IPs
 // user and pasword
@@ -41,8 +42,8 @@ function filterinputip($ip) {
 }
 
 
-
-// Insert IP or update semaphore_id in ipv4 or ipv6 tables
+// Insert IP or update semaphore_id in ipv4 or ipv6 tables based on action $a
+// 0 - temporarily blacklisted, 1 - permanently blacklisted, 2 - whitelisted, 3 - delisted
 function insertipvC($ip,$c,$a) {
     echo "fce insertipv$c".PHP_EOL;
 // Look up for IP. Is whitelisted? If yes exit
@@ -107,31 +108,7 @@ function insertipvC($ip,$c,$a) {
 } // end of insertipvX
 
 
-/*
-$x = "217.198.116.129";
-$i = filterinputip($x);
-echo $i.PHP_EOL;
-insertipvC($x,$i);
-
-$x = "2a00:19a0:3:74:0:d9c6:7481:1";
-$i = filterinputip($x);
-echo $i.PHP_EOL;
-insertipvC($x,$i);
-
-$x = "test.rest.cz";
-$i = filterinputip($x);
-echo $i.PHP_EOL;
-*/
-/*
-if (logrequest()[1] == 0) {
-    $x = logrequest()[0];
-    $i = filterinputip($x);
-    insertipvC($x,$i);
-} else {
-    echo "Ne a ne a ne!";
-}
-*/
-
+// Let's Rock'n'roll!
 
 // dig off input parameters
 $l = logrequest();
