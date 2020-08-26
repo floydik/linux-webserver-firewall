@@ -52,9 +52,10 @@ class Firewall
 	echo 'Success... ' . $mysqli->host_info . "\n";
 	
 	// get data 
-	    $ts_green = date('Y-m-d H:i:s',$timestamp-GREEN_TIME);
-	    $ts_yellow = date('Y-m-d H:i:s',$timestamp-YELLOW_TIME);
-	    $ts_red = date('Y-m-d H:i:s',$timestamp-RED_TIME);
+	    $timenow = time();
+	    $ts_green = date('Y-m-d H:i:s',$timenow-GREEN_TIME);
+	    $ts_yellow = date('Y-m-d H:i:s',$timenow-YELLOW_TIME);
+	    $ts_red = date('Y-m-d H:i:s',$timenow-RED_TIME);
 	// update ALL rules 
 	// first update IPv4 rules    
 	if ($stmt = $mysqli->prepare("SELECT `ip`,`mask` FROM `ipv4` WHERE `updatetime` > ? AND `semaphore_id` BETWEEN 2 AND 5;")) {
