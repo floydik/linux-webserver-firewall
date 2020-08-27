@@ -57,5 +57,4 @@ VALUES ('0', 'white', 'whitelisted IP'),
 ('2', 'green', 'known IP, now OK'),
 ('3', 'yellow', 'temporary blacklisted'),
 ('4', 'red', 'temporary blacklisted'),
-('5', 'black', 'permanently blacklisted'),
-('6', 'gray', 'for tests some future functionality');
+('5', 'black', 'permanently blacklisted');
