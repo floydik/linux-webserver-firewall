@@ -118,7 +118,7 @@ $action = $l[1];
 
 if ($x>0) { 
     echo '<!DOCTYPE html><html><body>';
-    echo '<div id="results">';
+    echo '<div id="result">';
     insertipvC($ip,$x,$action);
     echo '</div>';
     echo '</body></html>';
