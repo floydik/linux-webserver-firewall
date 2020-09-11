@@ -118,8 +118,8 @@ $action = $l[1];
 
 if ($x>0) { 
     echo "<!DOCTYPE html>\n<html>\n<body>\n";
-    echo "<div id=\"content\">\n";
-    echo "<p>";
+    echo "<div>\n";
+    echo "<p id=\"content\">";
     insertipvC($ip,$x,$action);
     echo "</p>";
     echo "</div>\n";
