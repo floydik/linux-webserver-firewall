@@ -126,10 +126,12 @@ class Firewall
 $fw = new Firewall();
 $xts = $fw->gettimestamp();
 echo '<!DOCTYPE html>\n<html>\n<body>\n';
+echo '<div id="results">';
 echo $xts.PHP_EOL;
 $x = $fw->getrules($xts);
 $xts = $fw->settimestamp();
 echo "... and it is done!".PHP_EOL;
 echo $x;
+echo '</div>';
 echo '</body>\n</html>\n';
 ?>
