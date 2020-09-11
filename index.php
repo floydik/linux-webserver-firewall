@@ -3,11 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>add/remmove firewall rules</title>
-        <link rel="stylesheet" href="firewall.css">     
+        <link rel="stylesheet" href="firewall.css">
+        <script src="jquery-3.5.0.js"></script>
     </head>
 
     <body>
-     <form action="api.php" method="post">
+     <form action="api.php" method="post" id="apiAction">
         <label for="ip">IP:</label><br>
         <input type="text" id="ip" name="ip" value="255.255.255.255"><br>
         <label for="source">source:</label><br>
@@ -24,5 +25,21 @@
         </select> 
         <input type="submit" value="Submit">
      </form>
+        
+     <div id="result"></div>   
+     <script>     
+     $( "#apiAction" ).submit(function( event ) {
+      event.preventDefault();
+      var $form = $( this ),
+      url = $form.attr( "action" );
+      var posting = $.post( url, $( "#apiAction" ).serialize() );
+      
+      posting.done(function( data ) {
+        var content = $( data ).find( "#content" );
+        $( "#result" ).empty().append( content );
+      });
+     });
+     </script>
+   
     </body>
 </html>
