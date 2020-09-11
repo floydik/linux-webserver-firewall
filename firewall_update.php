@@ -125,9 +125,18 @@ class Firewall
 // only for test
 $fw = new Firewall();
 $xts = $fw->gettimestamp();
+echo '<?xml version="1.0" encoding="UTF-8"?>\n';
+echo '<result>\n';
+echo '<ts>\n';  
 echo $xts.PHP_EOL;
+echo '</ts>\n';
+echo '<sql>\n';
 $x = $fw->getrules($xts);
 $xts = $fw->settimestamp();
+echo '</sql>\n';
+echo '<add>\n';
 echo "... and it is done!".PHP_EOL;
-echo $x.PHP_EOL;
+echo $x;
+echo '</add>';
+echo '</result>';
 ?>
