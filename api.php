@@ -117,10 +117,12 @@ $x = filterinputip($ip);
 $action = $l[1];
 
 if ($x>0) { 
-    echo "<!DOCTYPE html>\n<html>\n<body>";
+    echo "<!DOCTYPE html>\n<html>\n<body>\n";
     echo "<div id=\"result\">\n";
+    echo "<p>";
     insertipvC($ip,$x,$action);
-    echo "\n</div>\n";
+    echo "</p>";
+    echo "</div>\n";
     echo "</body>\n</html>\n";
 }
 
