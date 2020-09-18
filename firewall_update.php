@@ -41,7 +41,7 @@ class Firewall
 	// $timestamp 
 	// $iptype IPv4/IPv6
 	$ex = -2; //exit value
-	$timestamp = intval($timestamp); // string -> integer
+	$timestamp = intval($timestamp)-59; // string -> integer -59sec
 	$ts_date = date('Y-m-d H:i:s',$timestamp);
 	// connect to DB
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
