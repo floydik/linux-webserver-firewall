@@ -55,10 +55,10 @@ function insertipvC($ip,$c,$a) {
         die('Connect Error (' . mysqli_connect_errno() . ') '
            . mysqli_connect_error());
         }
-    //
+    // set mask for IPv4 to 32 and for IPv6 to 128
+    ($c==4) ? $mask = 32 : $mask = 128;
     if ($result = $mysqli->query($q)) {
         if (($result->num_rows) > 0) {
-            $c==4 ? $mask = 32 : $mask = 128;
             echo "IP se našla ;-)".PHP_EOL;
             $fields = $result->fetch_assoc();
             echo "semafor: ".$fields['semaphore_id'].PHP_EOL;
