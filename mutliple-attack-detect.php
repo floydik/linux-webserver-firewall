@@ -62,7 +62,7 @@ class Rules
                                         $handle2 = fopen($tmpfile2, "r");
                                         while(($ln2=fgets($handle2)) !==false) {
                                             // call api
-                                            blackhole($ip, $ln2);
+                                            Rules::blackhole($ip, $ln2);
                                             echo $ln2.PHP_EOL;
                                         }
                                     }
