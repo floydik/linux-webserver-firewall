@@ -1,11 +1,13 @@
 <?php
 // some settings
+$tmpfile = "multiple.tmp";
 require("settings.php");
 
 class Rules
 {
     function getrules()
     {
+        global $tmpfile;
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         if (mysqli_connect_error()) {
               die('Connect Error (' . mysqli_connect_errno() . ') '
@@ -16,10 +18,20 @@ class Rules
                 $stmt->execute();
                 $stmt->bind_result($rgx,$log,$trh,$ex);
                 while ($stmt->fetch()) {
-                        $execute = "cat ".$log." | grep -E '".$rgx."' | awk '{print $2}' | sort | uniq -c | sort -n > multiple.tmp";
+                        $execute = "cat ".$log." | grep -E '".$rgx."' | awk '{print $2}' | sort | uniq -c | sort -n > ".$tmpfile;
                         echo $execute.PHP_EOL;
                         $out =  shell_exec($execute);
-                        
+                        if (file_exists($tmpfile)) {
+                            $handle = fopen($tmpfile, "r");
+                            while(($ln=fgets($handle)) !==false) {
+                                $ln=trim($ln);
+                                $val=explode(" ",$ln);
+                                $ip=$val[1];
+                                $count=$val[0];
+                                if ($count > $trh) echo "blokujeme: ".$count.",".$ip.PHP_EOL;
+                            };
+                            fclose($handle);
+                        }
                     
                 }
                 $stmt->close();
