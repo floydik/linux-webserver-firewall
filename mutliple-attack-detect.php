@@ -4,7 +4,7 @@ require("settings.php");
 
 class Rules
 {
-    function getrules();
+    function getrules()
     {
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         if (mysqli_connect_error()) {
@@ -33,4 +33,9 @@ class Rules
 
 
 } // end of Rules
+
+$rul = new Rules();
+$x = $rul->getrules();
+echo "... and it is done!".PHP_EOL;
+
 ?>
