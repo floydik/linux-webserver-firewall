@@ -9,8 +9,7 @@ class Rules
 {
     function blackhole ($ip, $reason)
     {
-        $log = "/www/www/public_html/blackhole.log";
-        //$reason = "viz blackhole.log na Praxidike";
+        //        $log = "/www/www/public_html/blackhole.log";
         $curl = curl_init();
         curl_setopt_array($curl, [
         CURLOPT_RETURNTRANSFER => 1,
@@ -19,7 +18,7 @@ class Rules
         CURLOPT_POST => 1,
         CURLOPT_POSTFIELDS => [
             ip => $ip,
-            source => 'multiple detect',
+            source => 'multiple detector',
             reason => $reason,
             action => ''
             ]
@@ -74,13 +73,7 @@ class Rules
                 }
                 $stmt->close();
         }
-
-      
-
     } // getrules
-  
-// SELECT `regex` , `log` , `threshold` , `execute` FROM `rules` WHERE `active` = 1;
-
 
 } // end of Rules
 
