@@ -35,7 +35,8 @@ class Rules
                                 // get last request from IP
                                 $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." > ".$tmpfile2;
                                 $out2 =  shell_exec($execute2);
-                                echo "vystup2: ".$out2.PHP_EOL;
+//                                 echo "vystup2: ".$out2.PHP_EOL;
+                                print_r($out2);
                             };
                             fclose($handle);
                         }
