@@ -1,6 +1,8 @@
 <?php
 // some settings
 $tmpfile = "multiple.tmp";
+$tmpfile = "multiple2.tmp";
+
 require("settings.php");
 
 class Rules
@@ -28,7 +30,11 @@ class Rules
                                 $val=explode(" ",$ln);
                                 $ip=$val[1];
                                 $count=$val[0];
-                                if ($count > $trh) echo "blokujeme: ".$count.",".$ip.PHP_EOL;
+                                if ($count > $trh) echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
+                                // get last request from IP
+                                $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip > ".$tmpfile2;
+                                $out2 =  shell_exec($execute2);
+                                echo "vystup2: ".$out2.PHP_EOL;
                             };
                             fclose($handle);
                         }
