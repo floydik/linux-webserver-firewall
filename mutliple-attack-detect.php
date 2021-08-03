@@ -32,7 +32,7 @@ class Rules
                                 $count=$val[0];
                                 if ($count > $trh) echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
                                 // get last request from IP
-                                $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip > ".$tmpfile2;
+                                $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." > ".$tmpfile2;
                                 $out2 =  shell_exec($execute2);
                                 echo "vystup2: ".$out2.PHP_EOL;
                             };
