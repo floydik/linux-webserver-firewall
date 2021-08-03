@@ -1,7 +1,7 @@
 <?php
 // some settings
 $tmpfile = "multiple.tmp";
-$tmpfile = "multiple2.tmp";
+$tmpfile2 = "multiple2.tmp";
 
 require("settings.php");
 
