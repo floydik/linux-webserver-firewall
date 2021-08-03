@@ -7,6 +7,28 @@ require("settings.php");
 
 class Rules
 {
+    function blackhole ($ip, $reason)
+    {
+        $log = "/www/www/public_html/blackhole.log";
+        //$reason = "viz blackhole.log na Praxidike";
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_URL => 'http://vyboh.net/FW/linux-webserver-firewall/api.php',
+        CURLOPT_USERAGENT => 'Sample cURL Request',
+        CURLOPT_POST => 1,
+        CURLOPT_POSTFIELDS => [
+            ip => $ip,
+            source => 'multiple detect',
+            reason => $reason,
+            action => ''
+            ]
+        ]);
+        curl_exec($curl);
+        curl_close($curl);
+    }
+    
+    
     function getrules()
     {
         global $tmpfile;
@@ -40,6 +62,7 @@ class Rules
                                         $handle2 = fopen($tmpfile2, "r");
                                         while(($ln2=fgets($handle2)) !==false) {
                                             // call api
+                                            blackhole($ip, $ln2);
                                             echo $ln2.PHP_EOL;
                                         }
                                     }
