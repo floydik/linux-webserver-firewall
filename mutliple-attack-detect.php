@@ -16,7 +16,7 @@ class Rules
                 $stmt->execute();
                 $stmt->bind_result($rgx,$log,$trh,$ex);
                 while ($stmt->fetch()) {
-                        $cmd = "cat ".$log." | grep -E '".$rgx."' awk '{print $2}' | sort | uniq -c | sort -n > multiple.tmp"
+                        $cmd = "cat ".$log." | grep -E '".$rgx."' awk '{print $2}' | sort | uniq -c | sort -n > multiple.tmp";
                         $execute = escapeshellcmd($cmd);
                         echo $execute.PHP_EOL;
                         //$out =  shell_exec($execute);
