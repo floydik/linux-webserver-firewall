@@ -31,15 +31,17 @@ class Rules
                                 $val=explode(" ",$ln);
                                 $ip=$val[1];
                                 $count=$val[0];
-                                if ($count > $trh) echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
-                                // get last request from IP
-                                $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." > ".$tmpfile2;
-                                $out2 =  shell_exec($execute2);
-                                if (file_exists($tmpfile2)) {
-                                    $handle2 = fopen($tmpfile2, "r");
-                                    while(($ln2=fgets($handle2)) !==false) {
-                                        // call api
-                                        echo $ln2.PHP_EOL;
+                                if ($count > $trh) {
+                                    echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
+                                    // get last request from IP
+                                    $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." > ".$tmpfile2;
+                                    $out2 =  shell_exec($execute2);
+                                    if (file_exists($tmpfile2)) {
+                                        $handle2 = fopen($tmpfile2, "r");
+                                        while(($ln2=fgets($handle2)) !==false) {
+                                            // call api
+                                            echo $ln2.PHP_EOL;
+                                        }
                                     }
                                 }
                             };
