@@ -58,3 +58,14 @@ VALUES ('0', 'white', 'whitelisted IP'),
 ('3', 'yellow', 'temporary blacklisted'),
 ('4', 'red', 'temporary blacklisted'),
 ('5', 'black', 'permanently blacklisted');
+
+CREATE TABLE IF NOT EXISTS `rules` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `regex` varchar(512) NOT NULL,
+ `log` varchar(120) NOT NULL,
+ `threshold` int(11) NOT NULL,
+ `execute` int(11) NOT NULL,
+ `active` tinyint(1) NOT NULL,
+ PRIMARY KEY (`id`)) 
+ENGINE = InnoDB 
+DEFAULT CHARACTER SET = utf8;
