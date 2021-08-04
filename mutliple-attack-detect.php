@@ -34,6 +34,21 @@ class Rules
         fclose($handle);
     }
     
+    function blackholed($ip) 
+    {
+        if (filter_var($ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4)) {
+            $ex = "ip route sh | grep ".$ip;
+            }
+            elseif (filter_var($ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV6)) {
+            $ex = "ip -6 route sh | grep ".$ip;;
+            }
+        else {
+            $ex = "";
+            }
+        return($ex);
+    }
+
+    
     function getrules()
     {
         global $tmpfile;
