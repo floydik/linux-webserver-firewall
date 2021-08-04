@@ -17,10 +17,10 @@ class Rules
         CURLOPT_USERAGENT => 'Sample cURL Request',
         CURLOPT_POST => 1,
         CURLOPT_POSTFIELDS => [
-            ip => $ip,
-            source => 'multiple detector',
-            reason => $reason,
-            action => ''
+            "ip" => $ip,
+            "source" => 'multiple detector',
+            "reason" => $reason,
+            "action" => ''
             ]
         ]);
         curl_exec($curl);
