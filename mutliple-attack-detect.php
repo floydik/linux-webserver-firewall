@@ -44,8 +44,12 @@ class Rules
             }
         else {
             $ex = "";
-            }
-        return($ex);
+        }
+        unset($out);
+        $x = 0;
+        exec($ex,$out,$stats);
+        if (isset($out[0])) $x = 1;
+        return($x);
     }
 
     
@@ -74,16 +78,18 @@ class Rules
                                 $ip=$val[1];
                                 $count=$val[0];
                                 if ($count > $trh) {
-                                    echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
-                                    // get last request from IP
-                                    $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." | tail -n 1 > ".$tmpfile2;
-                                    $out2 =  shell_exec($execute2);
-                                    if (file_exists($tmpfile2)) {
-                                        $handle2 = fopen($tmpfile2, "r");
-                                        while(($ln2=fgets($handle2)) !==false) {
-                                            // call api
-                                            Rules::blackhole($ip, $ln2);
-                                            echo $ln2.PHP_EOL;
+                                    if (Rules::blackholed($ip) == 0 { 
+                                        echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
+                                        // get last request from IP
+                                        $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." | tail -n 1 > ".$tmpfile2;
+                                        $out2 =  shell_exec($execute2);
+                                        if (file_exists($tmpfile2)) {
+                                            $handle2 = fopen($tmpfile2, "r");
+                                            while(($ln2=fgets($handle2)) !==false) {
+                                                // call api
+                                                Rules::blackhole($ip, $ln2);
+                                                echo $ln2.PHP_EOL;
+                                            }
                                         }
                                     }
                                 }
