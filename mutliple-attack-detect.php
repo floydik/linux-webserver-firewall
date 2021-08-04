@@ -27,6 +27,13 @@ class Rules
         curl_close($curl);
     }
     
+    function log($log) 
+    {
+        global LOG;
+        $handle = fopen(LOG, "a+");
+        fwrite($handle, $str);
+        fclose($handle);
+    }
     
     function getrules()
     {
