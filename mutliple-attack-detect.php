@@ -9,7 +9,7 @@ class Rules
 {
     function blackhole ($ip, $reason)
     {
-        //        $log = "/www/www/public_html/blackhole.log";
+        Rules::log($reason);
         $curl = curl_init();
         curl_setopt_array($curl, [
         CURLOPT_RETURNTRANSFER => 1,
