@@ -25,6 +25,9 @@ define( 'YELLOW_TIME', 7 * 24 * 60 * 60 ); // one week
 define( 'RED_TIME', 30 * 24 * 60 * 60 ); // 30 days
 
 /* log file settings */
+// api:
 define ( 'LOGFIE', 'requests.log' );
+// local incidents log:
+define ( 'LOG', '/www/www/public_html/blackhole.log' );
 
 ?>
