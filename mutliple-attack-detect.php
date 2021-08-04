@@ -78,7 +78,7 @@ class Rules
                                 $ip=$val[1];
                                 $count=$val[0];
                                 if ($count > $trh) {
-                                    if (Rules::blackholed($ip)) == 0 { 
+                                    if (Rules::blackholed($ip) == 0) { 
                                         echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
                                         // get last request from IP
                                         $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." | tail -n 1 > ".$tmpfile2;
