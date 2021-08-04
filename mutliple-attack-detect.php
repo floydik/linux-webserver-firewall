@@ -29,7 +29,6 @@ class Rules
     
     function log($log) 
     {
-        global LOG;
         $handle = fopen(LOG, "a+");
         fwrite($handle, $str);
         fclose($handle);
