@@ -30,7 +30,7 @@ class Rules
     function log($log) 
     {
         $handle = fopen(LOG, "a+");
-        fwrite($handle, $str);
+        fwrite($handle, $log);
         fclose($handle);
     }
     
