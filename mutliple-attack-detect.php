@@ -67,7 +67,7 @@ class Rules
                 $stmt->execute();
                 $stmt->bind_result($rgx,$log,$trh,$ex);
                 while ($stmt->fetch()) {
-                        $execute = "cat ".$log." | grep -E '".$rgx."' | awk '{print $2}' | sort | uniq -c | sort -n > ".$tmpfile;
+                        $execute = "cat ".$log." | grep -P '".$rgx."' | awk '{print $2}' | sort | uniq -c | sort -n > ".$tmpfile;
                         echo $execute.PHP_EOL;
                         $out =  shell_exec($execute);
                         if (file_exists($tmpfile)) {
@@ -81,7 +81,7 @@ class Rules
                                     if (Rules::blackholed($ip) == 0) { 
                                         echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
                                         // get last request from IP
-                                        $execute2 = "cat ".$log." | grep -E '".$rgx."' | grep ".$ip." | tail -n 1 > ".$tmpfile2;
+                                        $execute2 = "cat ".$log." | grep -P '".$rgx."' | grep ".$ip." | tail -n 1 > ".$tmpfile2;
                                         $out2 =  shell_exec($execute2);
                                         if (file_exists($tmpfile2)) {
                                             $handle2 = fopen($tmpfile2, "r");
