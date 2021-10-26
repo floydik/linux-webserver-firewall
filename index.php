@@ -10,11 +10,11 @@
     <body>
      <form action="api.php" method="post" id="apiAction">
         <label for="ip">IP:</label><br>
-        <input type="text" id="ip" name="ip" value="255.255.255.255"><br>
+        <input type="text" id="ip" name="ip" size="50" value="255.255.255.255"><br>
         <label for="source">source:</label><br>
         <input type="text" id="source" name="source" value="manual-insert"><br><br>
         <label for="reason">reason:</label><br>
-        <input type="text" id="reason" name="reason" value="ftp attack"><br><br>
+        <input type="text" id="reason" name="reason" size="150" value="ftp attack"><br><br>
         <label for="action">action: </label>
         <select id="action" name="action">
           <option value="0">add to blacklist temporarily</option>
