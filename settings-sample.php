@@ -35,8 +35,8 @@ define ( 'LOG', '/www/www/public_html/blackhole.log' );
 /*
     whitelisted IP
 */
-define ( 'IPV4WL', '');
-define ( 'IPV6WL', '');
+define ( 'IPV4WL', '/^217\.198\.11/');
+define ( 'IPV6WL', '/^2a00:19a0:3:72:/');
 
 
 ?>
