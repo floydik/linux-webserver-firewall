@@ -38,8 +38,10 @@ function filterinputip($ip) {
     else {
         $ex = 0;
         }
+    // whitelisted IPs
+    if($ex == 4 && (preg_match_all(IPV4WL, $ip, $matches, PREG_SET_ORDER, 0))) $ex=0;
+    if($ex == 6 && (preg_match_all(IPV6WL, $ip, $matches, PREG_SET_ORDER, 0))) $ex=0;
   return($ex);
-    //
 }
 
 
