@@ -56,9 +56,9 @@ class Rules
         $s = intval(date('i'));
         $x = $s % $t;
         if ($x == 0) {
-            return(TRUE);
-        } else {
             return(FALSE);
+        } else {
+            return(TRUE);
         }
     }
     
@@ -75,9 +75,8 @@ class Rules
         if ($stmt = $mysqli->prepare("SELECT `regex` , `log` , `threshold` , `execute` FROM `rules` WHERE `active` = 1;")) {
                 $stmt->execute();
                 $stmt->bind_result($rgx,$log,$trh,$ex);
-                if (Rules::t4act($ex)) { 
-                    
                 while ($stmt->fetch()) {
+                        if (Rules::t4act($ex)) continue;
                         $execute = "cat ".$log." | grep -P '".$rgx."' | awk '{print $2}' | sort | uniq -c | sort -n > ".$tmpfile;
                         echo $execute.PHP_EOL;
                         $out =  shell_exec($execute);
@@ -89,7 +88,7 @@ class Rules
                                 $ip=$val[1];
                                 $count=$val[0];
                                 if ($count > $trh) {
-                                    if (Rules::blackholed($ip) == 0) { 
+                                    if (Rules::blackholed($ip) == 0) {
                                         echo "blokujeme: ".$count.",".$ip.PHP_EOL; // for test only
                                         // get last request from IP
                                         $execute2 = "cat ".$log." | grep -P '".$rgx."' | grep ".$ip." | tail -n 1 > ".$tmpfile2;
@@ -107,12 +106,12 @@ class Rules
                             };
                             fclose($handle);
                         }
-                    
+
                 }
-                } // end of time4action
                 $stmt->close();
         }
     } // getrules
+    
 
 } // end of Rules
 
