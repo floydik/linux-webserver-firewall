@@ -52,6 +52,11 @@ class Rules
         return($x);
     }
 
+    function t4act($t) {
+        $s = intval(date('i'));
+        $x = $s % $t;
+        if ($x == 0) return(TRUE) else return(FALSE);
+    }
     
     function getrules()
     {
@@ -66,6 +71,8 @@ class Rules
         if ($stmt = $mysqli->prepare("SELECT `regex` , `log` , `threshold` , `execute` FROM `rules` WHERE `active` = 1;")) {
                 $stmt->execute();
                 $stmt->bind_result($rgx,$log,$trh,$ex);
+                if (Rules::t4act($ex)) { 
+                    
                 while ($stmt->fetch()) {
                         $execute = "cat ".$log." | grep -P '".$rgx."' | awk '{print $2}' | sort | uniq -c | sort -n > ".$tmpfile;
                         echo $execute.PHP_EOL;
@@ -98,6 +105,7 @@ class Rules
                         }
                     
                 }
+                } // end of time4action
                 $stmt->close();
         }
     } // getrules
