@@ -55,7 +55,11 @@ class Rules
     function t4act($t) {
         $s = intval(date('i'));
         $x = $s % $t;
-        if ($x == 0) return(TRUE) else return(FALSE);
+        if ($x == 0) {
+            return(TRUE);
+        } else {
+            return(FALSE);
+        }
     }
     
     function getrules()
