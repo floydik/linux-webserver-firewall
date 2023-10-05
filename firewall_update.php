@@ -51,7 +51,10 @@ class Firewall
 	}
 	echo 'Success... ' . $mysqli->host_info . "\n";
 	// avoid "MySQL server has gone away" error
-	$mysqli->query("set session wait_timeout=600");
+	$mysqli->query("set session wait_timeout=1200");
+	$mysqli->query("set session net_read_timeout=1200;");
+    	$mysqli->query("set session net_write_timeout=1200;");
+	    
 	// get data 
 	    $timenow = time();
 	    $ts_green = date('Y-m-d H:i:s',$timenow-GREEN_TIME);
