@@ -5,6 +5,7 @@
 */
 // some settings
 $tsfile = "/tmp/firewall.sync";
+$updating = "/tmp/firewall.update";
 require("settings.php");
 class Firewall
 {
@@ -127,11 +128,19 @@ class Firewall
     }
 }
 // only for test
+if (file_exists($updating)) die ("Under update".PHP_EOL);
+$fu = fopen($updating,"w+");
+fwrite($fu, "Under update");
+fclose($fu);
+
 $fw = new Firewall();
 $xts = $fw->gettimestamp();
 echo $xts.PHP_EOL;
 $x = $fw->getrules($xts);
 $xts = $fw->settimestamp();
+
+unlink($updating);
+
 echo "... and it is done!".PHP_EOL;
 echo $x.PHP_EOL;
 ?>
