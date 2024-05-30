@@ -37,10 +37,10 @@ class Rules
     function blackholed($ip) 
     {
         if (filter_var($ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4)) {
-            $ex = "ip route sh | grep ".$ip;
+            $ex = "ip route sh | grep -P '^blackhole\s".$ip."\s'";
             }
             elseif (filter_var($ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV6)) {
-            $ex = "ip -6 route sh | grep ".$ip;;
+            $ex = "ip -6 route sh | grep -P '^blackhole\s".$ip."\s'";
             }
         else {
             $ex = "";
