@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `ipv4` (
   `updatetime` TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP(),
   `semaphore_id` TINYINT(3) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`, `semaphore_id`),
+  UNIQUE KEY `ip` (`ip`),
   INDEX `fk_ipv4_semaphore1_idx` (`semaphore_id` ASC),
   CONSTRAINT `fk_ipv4_semaphore1`
     FOREIGN KEY (`semaphore_id`)
@@ -38,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `ipv6` (
   `updatetime` TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP(),
   `semaphore_id` TINYINT(3) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`, `semaphore_id`),
+  UNIQUE KEY `ip` (`ip`),
   INDEX `fk_ipv6_semaphore_idx` (`semaphore_id` ASC),
   CONSTRAINT `fk_ipv6_semaphore`
     FOREIGN KEY (`semaphore_id`)
