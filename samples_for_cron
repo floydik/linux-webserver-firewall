@@ -1,0 +1,1 @@
+grep "Authentication failed" /var/log/syslog | grep -v CRON | cut -d@ -f2 | cut -d\) -f1 | sort | uniq -c | sort -n | awk '$1 > 10 {print $2}' | xargs -n1 /usr/bin/php7.4 -f /home/userxy/scripts/ftp2blackhole.php
